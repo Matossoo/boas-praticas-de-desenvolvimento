@@ -99,7 +99,9 @@ def atualizar_funcionario(id_funcionario, nome, cargo, id_setor):
     cursor.close()
     conexao.close()
 
-def deletar_funcionario():
+def deletar_funcionario(id_funcionario):
+
+
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -107,6 +109,25 @@ def deletar_funcionario():
     delete from funcionario
     where id_funcionario = %s
     """
+    valores = (id_funcionario)
+    cursor.execute(sql, (valores,))
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    sql = """
+    delete from setor
+    where id_setor = %s
+    """
+    valores = (id_setor,)
+    cursor.execute(sql, valores)
+    conexao.commit()
+
+    print(f"Setor {id_setor} deletado com sucesso!")
 
     cursor.close()
     conexao.close()
