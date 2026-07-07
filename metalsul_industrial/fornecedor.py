@@ -5,7 +5,7 @@ def listar_fornecedores():
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = "SELECT * FROM fornecedor"
+    sql = "SELECT id_fornecedor, razao_social, cnpj, telefone, cidade FROM fornecedor"
     cursor.execute(sql)
     fornecedores = cursor.fetchall()
 
@@ -15,26 +15,26 @@ def listar_fornecedores():
     cursor.close()
     conexao.close()
 
-def cadastrar_fornecedor(nome, cnpj, endereco, telefone):
+def cadastrar_fornecedor(razao_social, cnpj, telefone, cidade):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = "INSERT INTO fornecedor (nome, cnpj, endereco, telefone) VALUES (%s, %s, %s, %s)"
-    valores = (nome, cnpj, endereco, telefone)
+    sql = "INSERT INTO fornecedor (razao_social, cnpj, telefone, cidade) VALUES (%s, %s, %s, %s)"
+    valores = (razao_social, cnpj, telefone, cidade)
     cursor.execute(sql, valores)
     conexao.commit()
 
-    print(f"Fornecedor {nome} cadastrado com sucesso!")
+    print(f"Fornecedor {razao_social} cadastrado com sucesso!")
 
     cursor.close()
     conexao.close()
 
-def atualizar_fornecedor(id_fornecedor, nome, cnpj, endereco, telefone):
+def atualizar_fornecedor(id_fornecedor, razao_social, cnpj, telefone, cidade):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = "UPDATE fornecedor SET nome = %s, cnpj = %s, endereco = %s, telefone = %s WHERE id_fornecedor = %s"
-    valores = (nome, cnpj, endereco, telefone, id_fornecedor)
+    sql = "UPDATE fornecedor SET razao_social = %s, cnpj = %s, telefone = %s, cidade = %s WHERE id_fornecedor = %s"
+    valores = (razao_social, cnpj, telefone, cidade, id_fornecedor)
     cursor.execute(sql, valores)
     conexao.commit()
 
