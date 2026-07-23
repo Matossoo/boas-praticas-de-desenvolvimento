@@ -1,1 +1,0 @@
-#utilidades para o sistema
